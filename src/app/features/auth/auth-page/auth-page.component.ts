@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, NgModule } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import {
   trigger,
   state,
@@ -7,6 +12,9 @@ import {
   transition,
   animate,
 } from '@angular/animations';
+
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-auth-page',
@@ -47,7 +55,10 @@ export class AuthPageComponent {
   registerForm: FormGroup;
   showRegister = false;
 
-  constructor(private afAuth: AngularFireAuth, private fb: FormBuilder) {
+  constructor(
+    private afAuth: AngularFireAuth,
+    @Inject(FormBuilder) private fb: FormBuilder
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
