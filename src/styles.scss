@@ -1,21 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
+$primary:#2ECC71;
 @import "bootstrap/scss/bootstrap";
 
-:root {
-  --primary-color: rgb(99, 85, 216);
-  --secondary-color: #e16bdd;
-  --success-color: rgb(29, 215, 91);
-  --warning-color: rgb(255, 193, 7);
-  --danger-color: rgb(220, 53, 69);
-  --background-color: rgb(231, 231, 231);
-  --onbackground-color: rgb(56, 59, 59);
-  --neutral-color: rgb(144, 149, 161);
-  --primary-dark: #130e3eff;
-  --border-color: #9095a1ff;
-  --empty-color: #ffffffff;
-}
+// $secondary: #your-desired-secondary-color;
+// $success: #your-desired-success-color;
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -49,7 +39,15 @@ body {
 .sub-container {
   flex-grow: 1;
   height: 100%;
-  padding: 10px;
   box-sizing: border-box;
   overflow-y: auto;
+}
+
+.row{
+  display: flex;
+}
+
+.col{
+  display: flex;
+  flex-direction: column;
 }

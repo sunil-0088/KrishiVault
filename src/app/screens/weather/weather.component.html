@@ -1,0 +1,41 @@
+<div class="w-container">
+<app-current-weather></app-current-weather>
+
+  <!-- <div class="input-group w-50 mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter location"
+      [(ngModel)]="location"
+      list="locationOptions"
+    />
+    <datalist id="locationOptions">
+      <option *ngFor="let option of options" [value]="option"></option>
+    </datalist>
+    <button class="btn btn-primary" (click)="onSearch()">Search</button>
+  </div>
+
+  <div *ngIf="weatherData">
+    <h2>{{ weatherData.location.name }}</h2>
+    <p>{{ weatherData.current.condition.text }}</p>
+    <p>Temperature: {{ weatherData.current.temp_c }} °C</p>
+    <p>Humidity: {{ weatherData.current.humidity }} %</p>
+    <p>Wind Speed: {{ weatherData.current.wind_kph }} kph</p>
+  </div>
+
+  <div *ngIf="forecastData">
+    <h3>3-Day Forecast</h3>
+    <div *ngFor="let day of forecastData">
+      <p>{{ day.date }}</p>
+      <p>Condition: {{ day.day.condition.text }}</p>
+      <p>Max Temp: {{ day.day.maxtemp_c }} °C</p>
+      <p>Min Temp: {{ day.day.mintemp_c }} °C</p>
+    </div>
+  </div>
+
+  <div *ngIf="historyData.length > 0">
+    <h3>7-Day Historical Data</h3>
+    <canvas class="chart chart-line" chart-data="historyData" chart-labels="labels" 
+    chart-series="series" chart-click="onClick"></canvas> 
+  </div> -->
+</div>
