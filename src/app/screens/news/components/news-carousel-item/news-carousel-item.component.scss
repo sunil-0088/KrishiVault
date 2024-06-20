@@ -1,0 +1,57 @@
+.content-container {
+    background-color: rgba(255, 192, 203, 0.8); /* Light pink background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2; /* Ensure it's above the image */
+}
+
+.image-container {
+    position: relative;
+    margin-left: -50px; /* Overlap adjustment */
+}
+
+.image-container img {/* Optional: Border similar to the provided image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .row-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-container {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .row-wrapper {
+        background: url('/assets/demo.jpg') no-repeat center center/cover;
+        padding: 20px;
+    }
+
+    .content-container {
+        background-color: rgba(255, 192, 203, 0.8); /* Light pink background */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 2; /* Ensure it's above the background image */
+        position: relative;
+    }
+
+    .image-container {
+        display: none;
+    }
+}
+.truncate-2-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* Required for webkit-line-clamp to work */
+}
