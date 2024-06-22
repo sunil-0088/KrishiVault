@@ -1,6 +1,18 @@
-.vertical-line {
-      border-left: 2px solid black;
-      height: 100%;
-      position: absolute;
-      left: 50%;
+
+@media (max-width: 767px) {
+      .border-md-bottom {
+        border-bottom: 1px solid #838383;
+        
+      }
+      .curr-weather{
+
+        border-bottom: 1px solid #838383;
+        padding: 10px 0px;
+        
+      }
+    }
+@media (min-width: 768px) {
+      .border-md-bottom {
+        border-right: 1px solid #838383;
+      }
     }

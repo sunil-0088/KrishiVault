@@ -1,1 +1,24 @@
-<p>forecast works!</p>
+<div class="col">
+  <!-- <div style="display: block">
+    <canvas baseChart id="canvas">
+      {{ chartOptions }}
+    </canvas>
+  </div> -->
+  <p-chart type="line" [data]="basicData" [options]="basicOptions"> </p-chart>
+  <div class="row mx-1 my-3">
+    <ng-container *ngFor="let hour of forecastDays![0].hour; let i = index">
+      <div *ngIf="i % 2 === 0" class="col-md-2 col-3 p-2">
+        <div class="hour-item col align-items-center">
+          <div class="responsive-text">{{ times[i / 2] }}</div>
+          <img [src]="hour.condition.icon" alt="" />
+          <div class="responsive-text">{{ hour.temp_c }}&deg;C</div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <h3>Next Two Days Forecast</h3>
+  <div class="row justify-content-between">
+    <div class="col-6 border">hal</div>
+    <div class="col-6 border">hal</div>
+  </div>
+</div>

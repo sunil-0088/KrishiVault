@@ -1,0 +1,23 @@
+.hour-item {
+    background-color: rgb(221, 221, 221);
+    border-radius: 4px;
+    padding: 4px;
+    
+  img {
+   max-width:  48px;
+   max-height: 48px;
+  }
+
+}
+
+@media (max-width: 460px) {
+  .responsive-text {
+    font-size: 3vw; /* Adjust font size for smaller screens */
+  }
+}
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+

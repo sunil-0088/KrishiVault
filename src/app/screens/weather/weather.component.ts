@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from './services/weather.service';
-import { Chart } from 'chart.js';
-import { Observable, map, startWith } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  startWith,
+} from 'rxjs';
+import { WeatherData } from './model/weather-data';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-weather',
@@ -9,29 +17,49 @@ import { Observable, map, startWith } from 'rxjs';
   styleUrls: ['./weather.component.scss'],
 })
 export class WeatherComponent implements OnInit {
-  weatherData: any;
+  weatherData!: WeatherData;
   forecastData: any;
   historyData: any[] = [];
   location: string = '';
-
-  options: string[] = ['New York', 'Los Angeles', 'Chicago']; // sample options
+  searchControl: FormControl = new FormControl();
+  private searchSubject: Subject<string> = new Subject();
+  options: any; // sample options
 
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
+    // Subscribe to the subject with debounceTime
     this.getDeviceLocation();
+
+    this.searchSubject
+      .pipe(
+        debounceTime(300), // Adjust the debounce time as needed
+        distinctUntilChanged() // Only emit when the current value is different from the last
+      )
+      .subscribe((searchText) => {
+        this.weatherService.getSearchLocations(searchText).subscribe((data) => {
+          this.options = data;
+          console.log(this.options);
+        });
+      });
+
+    // Subscribe to the FormControl changes
+    this.searchControl.valueChanges.subscribe((value) => {
+      this.searchSubject.next(value);
+    });
   }
 
   getWeather(location: string): void {
-    this.weatherService.getWeatherByLocation(location).subscribe((data) => {
-      this.weatherData = data;
-    });
+    // this.weatherService.getWeatherByLocation(location).subscribe((data) => {
+    //   this.weatherData = data;
+    // });
 
     this.weatherService.getForecastByLocation(location).subscribe((data) => {
-      this.forecastData = data.forecast.forecastday;
+      this.weatherData = data;
+      console.log(this.weatherData);
     });
 
-    this.getHistoricalData(location);
+    // this.getHistoricalData(location);
   }
 
   getHistoricalData(location: string): void {
@@ -59,19 +87,19 @@ export class WeatherComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
-        this.weatherService
-          .getWeatherByLocation(`${lat},${lon}`)
-          .subscribe((data) => {
-            this.weatherData = data;
-            console.log(this.weatherData);
-          });
+        // this.weatherService
+        //   .getWeatherByLocation(`${lat},${lon}`)
+        //   .subscribe((data) => {
+        //     this.weatherData = data;
+        //     console.log(this.weatherData);
+        //   });
+        console.log(`${lat},${lon}`);
 
         this.weatherService
           .getForecastByLocation(`${lat},${lon}`)
           .subscribe((data) => {
-            this.forecastData = data.forecast.forecastday;
-            console.log(this.forecastData);
-            
+            this.weatherData = data;
+            console.log(this.weatherData);
           });
 
         this.getHistoricalData(`${lat},${lon}`);
