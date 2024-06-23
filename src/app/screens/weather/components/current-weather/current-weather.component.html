@@ -1,52 +1,54 @@
-<div class="col mx-1">
-    <h2>{{ location?.name }}, {{ location?.region }} ({{ location?.country }})</h2>
-<h5>{{ location?.localtime | date : "EEEE d MMMM, yyyy" }}</h5>
-
-<div class="row justify-content-center align-items-center">
-  <div
-    class="border-md-bottom row col-md-6 align-items-center justify-content-center"
-  >
-    <img
-      class="col-6"
-      style="max-height: 150px; max-width: 150px;"
-      [src]="currentData?.condition?.icon"
-      alt=""
-    />
-    <div class="col align-items-center col-6">
-      <h2 style="font-size: 7vw;">{{ currentData?.temp_c }}&deg;C</h2>
-      <div class="text-center">{{ currentData?.condition?.text }}</div>
+<div class="col mx-1 my-2">
+  <div class="col align-items-center">
+    <h2 class="text-center">
+      {{ location?.name }}, {{ location?.region }} ({{ location?.country }})
+    </h2>
+    <h5>{{ location?.localtime | date : "EEEE d MMMM, yyyy" }}</h5>
+  </div>
+  <div class="row justify-content-center align-items-center">
+    <div
+      class="border-md-bottom row col-md-6 align-items-center justify-content-center"
+    >
+      <img
+        class="col-6"
+        style="max-height: 150px; max-width: 150px"
+        [src]="currentData?.condition?.icon"
+        alt=""
+      />
+      <div class="col align-items-center col-6">
+        <h2 style="font-size: 7vw">{{ currentData?.temp_c }}&deg;C</h2>
+        <div class="text-center">{{ currentData?.condition?.text }}</div>
+      </div>
+    </div>
+    <div class="curr-weather col col-md-6">
+      <div class="row mb-3 justify-content-between">
+        <div class="col align-items-center">
+          <div>{{ today?.maxtemp_c }}&deg;C</div>
+          <div>High</div>
+        </div>
+        <div class="col align-items-center">
+          <div>{{ currentData?.wind_mph }}mph</div>
+          <div>Wind</div>
+        </div>
+        <div class="col align-items-center">
+          <div>{{ astrodata?.sunrise }}</div>
+          <div>Sunrise</div>
+        </div>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col align-items-center">
+          <div>{{ today?.mintemp_c }}&deg;C</div>
+          <div>Low</div>
+        </div>
+        <div class="col align-items-center">
+          <div>{{ today?.daily_chance_of_rain }}%</div>
+          <div>Rain</div>
+        </div>
+        <div class="col align-items-center">
+          <div>{{ astrodata?.sunset }}</div>
+          <div>Sunset</div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="curr-weather col col-md-6">
-    <div class="row mb-3 justify-content-between">
-      <div class="col align-items-center">
-        <div>{{ today?.maxtemp_c }}&deg;C</div>
-        <div>High</div>
-      </div>
-      <div class="col align-items-center">
-        <div>{{ currentData?.wind_mph }}mph</div>
-        <div>Wind</div>
-      </div>
-      <div class="col align-items-center">
-        <div>{{ astrodata?.sunrise }}</div>
-        <div>Sunrise</div>
-      </div>
-    </div>
-    <div class="row justify-content-between">
-      <div class="col align-items-center">
-        <div>{{ today?.mintemp_c }}&deg;C</div>
-        <div>Low</div>
-      </div>
-      <div class="col align-items-center">
-        <div>{{ today?.daily_chance_of_rain }}%</div>
-        <div>Rain</div>
-      </div>
-      <div class="col align-items-center">
-        <div>{{ astrodata?.sunset }}</div>
-        <div>Sunset</div>
-      </div>
-    </div>
-  </div>
-</div>
-
 </div>
