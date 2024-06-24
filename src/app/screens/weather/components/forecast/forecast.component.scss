@@ -1,13 +1,12 @@
 .hour-item {
-    background-color: rgb(221, 221, 221);
-    border-radius: 4px;
-    padding: 4px;
-    
-  img {
-   max-width:  48px;
-   max-height: 48px;
-  }
+  background-color: rgb(221, 221, 221);
+  border-radius: 4px;
+  padding: 4px;
 
+  img {
+    max-width: 48px;
+    max-height: 48px;
+  }
 }
 
 @media (max-width: 460px) {
@@ -21,9 +20,20 @@ canvas {
   height: auto !important;
 }
 
-.hour-forecast{
-    display: flex;
+.hour-forecast {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  background-color: rgb(161, 235, 91);
+}
+
+.forecast-card {
+  .row {
     flex-wrap: nowrap;
-    overflow-x: auto;
-    background-color: rgb(161, 235, 91);
+  }
+  .col{
+    div{
+        font-size:12px;
+    }
+  }
 }

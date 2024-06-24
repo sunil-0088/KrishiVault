@@ -24,7 +24,7 @@ export class WeatherComponent implements OnInit {
   searchControl: FormControl = new FormControl();
   private searchSubject: Subject<string> = new Subject();
   options: any; // sample options
-
+  isloading: boolean = true;
   constructor(private weatherService: WeatherService) {}
 
   ngOnInit(): void {
@@ -56,6 +56,7 @@ export class WeatherComponent implements OnInit {
 
     this.weatherService.getForecastByLocation(location).subscribe((data) => {
       this.weatherData = data;
+      this.isloading = false;
       console.log(this.weatherData);
     });
 
@@ -99,6 +100,8 @@ export class WeatherComponent implements OnInit {
           .getForecastByLocation(`${lat},${lon}`)
           .subscribe((data) => {
             this.weatherData = data;
+            this.isloading = false;
+
             console.log(this.weatherData);
           });
 
