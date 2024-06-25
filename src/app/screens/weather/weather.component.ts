@@ -5,11 +5,13 @@ import {
   Subject,
   debounceTime,
   distinctUntilChanged,
+  forkJoin,
   map,
   startWith,
 } from 'rxjs';
 import { WeatherData } from './model/weather-data';
 import { FormControl } from '@angular/forms';
+import { HistoryData } from './model/history-data';
 
 @Component({
   selector: 'app-weather',
@@ -19,7 +21,7 @@ import { FormControl } from '@angular/forms';
 export class WeatherComponent implements OnInit {
   weatherData!: WeatherData;
   forecastData: any;
-  historyData: any[] = [];
+  historyData: HistoryData[] = [];
   location: string = '';
   searchControl: FormControl = new FormControl();
   private searchSubject: Subject<string> = new Subject();
@@ -39,7 +41,6 @@ export class WeatherComponent implements OnInit {
       .subscribe((searchText) => {
         this.weatherService.getSearchLocations(searchText).subscribe((data) => {
           this.options = data;
-          console.log(this.options);
         });
       });
 
@@ -50,33 +51,39 @@ export class WeatherComponent implements OnInit {
   }
 
   getWeather(location: string): void {
-    // this.weatherService.getWeatherByLocation(location).subscribe((data) => {
-    //   this.weatherData = data;
-    // });
-
     this.weatherService.getForecastByLocation(location).subscribe((data) => {
+      this.getHistoricalData(location);
       this.weatherData = data;
-      this.isloading = false;
-      console.log(this.weatherData);
     });
-
-    // this.getHistoricalData(location);
   }
 
   getHistoricalData(location: string): void {
+    this.isloading = true; // Set loading to true when starting the requests
+    const observables = [];
+  
     for (let i = 1; i <= 7; i++) {
       const date = new Date();
       date.setDate(date.getDate() - i);
       const dateString = date.toISOString().split('T')[0];
-
-      this.weatherService
-        .getHistoryByLocation(location, dateString)
-        .subscribe((data) => {
-          this.historyData.push(data);
-        });
+      observables.push(this.weatherService.getHistoryByLocation(location, dateString));
     }
-
-    console.log(this.historyData);
+  
+    forkJoin(observables)
+      .pipe(
+        map((responses) => {
+          return responses.map((response) => response); // Process each response if needed
+        })
+      )
+      .subscribe(
+        (data) => {
+          this.historyData = data;
+          this.isloading = false;
+        },
+        (error) => {
+          console.error('Error fetching historical data:', error);
+          this.isloading = false;
+        }
+      );
   }
 
   onSearch(): void {
@@ -94,18 +101,17 @@ export class WeatherComponent implements OnInit {
         //     this.weatherData = data;
         //     console.log(this.weatherData);
         //   });
-        console.log(`${lat},${lon}`);
 
         this.weatherService
           .getForecastByLocation(`${lat},${lon}`)
           .subscribe((data) => {
             this.weatherData = data;
-            this.isloading = false;
+            this.getHistoricalData(`${lat},${lon}`);
 
             console.log(this.weatherData);
           });
 
-        this.getHistoricalData(`${lat},${lon}`);
+        
       });
     }
   }

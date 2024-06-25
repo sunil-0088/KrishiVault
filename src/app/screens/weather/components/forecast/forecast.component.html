@@ -13,9 +13,9 @@
           {{ forecastDay.date | date : "EEEE d MMMM, yyyy" }}
         </div>
         <div class="row">
-          <div class="col-3 justify-content-center align-items-center">
+          <div class=" w-condition col-3 justify-content-center align-items-center">
             <img [src]="forecastDay.day.condition.icon" alt="" />
-            <div style="font-size: 12px">
+            <div style="font-size: 12px" class="text-center">
               {{ forecastDay.day.condition.text }}
             </div>
           </div>
@@ -56,4 +56,6 @@
       </div>
     </div>
   </div>
+  
+  
 </div>

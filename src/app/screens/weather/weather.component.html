@@ -33,7 +33,7 @@
       </button>
     </div>
     <app-current-weather
-      class="w-100"
+    class="w-100"
       [currentData]="weatherData.current"
       [location]="weatherData.location"
       [today]="weatherData.forecast.forecastday[0].day"
@@ -42,5 +42,6 @@
     <app-forecast
       [forecastDays]="weatherData.forecast.forecastday"
     ></app-forecast>
+    <app-historical-data  class="w-100"  [historyData]="historyData"></app-historical-data>
   </div>
 </ng-template>

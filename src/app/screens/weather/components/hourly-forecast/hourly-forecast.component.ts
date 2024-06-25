@@ -31,8 +31,6 @@ export class HourlyForecastComponent {
   ngAfterViewInit(): void {
     const ctx = this.chartRef!.nativeElement.getContext('2d');
     this.initializeChart(ctx);
-    console.log(this.hourlyData);
-    console.log(ctx);
   }
 
   initializeChart(ctx: any) {
