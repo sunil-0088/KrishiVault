@@ -2,6 +2,8 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { HourData } from '../../model/hour-data';
 import { Chart } from 'chart.js';
 
+
+declare var bootstrap: any; 
 @Component({
   selector: 'app-hourly-forecast',
   templateUrl: './hourly-forecast.component.html',
@@ -31,6 +33,14 @@ export class HourlyForecastComponent {
   ngAfterViewInit(): void {
     const ctx = this.chartRef!.nativeElement.getContext('2d');
     this.initializeChart(ctx);
+   const popoverTriggerList = [].slice.call(
+     document.querySelectorAll('[data-bs-toggle="popover"]')
+   );
+   popoverTriggerList.forEach((popoverTriggerEl) => {
+     new bootstrap.Popover(popoverTriggerEl, {
+       container: 'body',
+     });
+   });
   }
 
   initializeChart(ctx: any) {

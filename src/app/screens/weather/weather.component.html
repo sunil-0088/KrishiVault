@@ -1,39 +1,35 @@
+<div class="w-container">
+    <div class="d-flex col-md-8 col-12 g-3 align-items-center" style="margin: 0px auto;">
+  <div class="input-group m-3">
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Enter location"
+      [(ngModel)]="location"
+      list="locationOptions"
+      [formControl]="searchControl"
+    /><datalist id="locationOptions">
+      <option
+        *ngFor="let option of options"
+        [value]="
+          option?.name + ', ' + option?.region + ' (' + option?.country + ')'
+        "
+      ></option>
+    </datalist>
+
+    <button class="btn btn-outline-success" (click)="onSearch()">
+      <i class="bi bi-search"></i>
+    </button>
+  </div>
+  <button class="btn btn-outline-success" (click)="getDeviceLocation()">
+    <i class="bi bi-geo-alt"></i>
+  </button>
+</div>
 <div *ngIf="isloading; else loaded">Ruk jaa thodi der mc</div>
 <ng-template #loaded>
-  <div class="w-container col align-items-center">
-    <div class="d-flex col-md-8 col-12 g-3 align-items-center">
-      <div class="input-group m-3">
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Enter location"
-          [(ngModel)]="location"
-          list="locationOptions"
-          [formControl]="searchControl"
-        /><datalist id="locationOptions">
-          <option
-            *ngFor="let option of options"
-            [value]="
-              option?.name +
-              ', ' +
-              option?.region +
-              ' (' +
-              option?.country +
-              ')'
-            "
-          ></option>
-        </datalist>
-
-        <button class="btn btn-outline-success" (click)="onSearch()">
-          <i class="bi bi-search"></i>
-        </button>
-      </div>
-      <button class="btn btn-outline-success" (click)="getDeviceLocation()">
-        <i class="bi bi-geo-alt"></i>
-      </button>
-    </div>
+  <div class=" col align-items-center">
     <app-current-weather
-    class="w-100"
+      class="w-100"
       [currentData]="weatherData.current"
       [location]="weatherData.location"
       [today]="weatherData.forecast.forecastday[0].day"
@@ -42,6 +38,11 @@
     <app-forecast
       [forecastDays]="weatherData.forecast.forecastday"
     ></app-forecast>
-    <app-historical-data  class="w-100"  [historyData]="historyData"></app-historical-data>
+    <app-historical-data
+      class="w-100"
+      [historyData]="historyData"
+    ></app-historical-data>
   </div>
 </ng-template>
+
+</div>

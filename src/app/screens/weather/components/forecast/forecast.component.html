@@ -12,7 +12,7 @@
         <div class="mb-2">
           {{ forecastDay.date | date : "EEEE d MMMM, yyyy" }}
         </div>
-        <div class="row">
+        <div class="row align-items-center">
           <div class=" w-condition col-3 justify-content-center align-items-center">
             <img [src]="forecastDay.day.condition.icon" alt="" />
             <div style="font-size: 12px" class="text-center">
@@ -48,9 +48,9 @@
                 <div>Sunset</div>
               </div>
             </div>
-            <div class="row justify-content-end me-1">
+            <!-- <div class="row justify-content-end me-1">
               <div class="col-4 btn btn-outline-secondary btn-sm">Hourly</div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
