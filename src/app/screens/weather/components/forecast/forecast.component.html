@@ -1,83 +1,55 @@
 <div class="col">
-  <div class="nav-tabs">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link active" data-bs-toggle="tab" href="#tab1">Graph</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#tab2">Basic</a>
-      </li>
-    </ul>
-  </div>
-  <div class="tab-content">
-    <div class="tab-pane active" id="tab1">
-      <div class="row my-3" style="max-width: 1024px">
-        <canvas #myChart></canvas>
-      </div>
-    </div>
-    <div class="tab-pane" id="tab2">
-      <div class="row mx-1 my-3">
-        <ng-container *ngFor="let hour of forecastDays![0].hour; let i = index">
-          <div *ngIf="i % 2 === 0" class="col-md-2 col-3 p-2">
-            <div class="hour-item col align-items-center card shadow-sm">
-              <div class="responsive-text">{{ times[i / 2] }}</div>
-              <img [src]="hour.condition.icon" alt="" />
-              <div class="responsive-text">{{ hour.temp_c }}&deg;C</div>
-            </div>
-          </div>
-        </ng-container>
-      </div>
-    </div>
-  </div>
-
-  <h3>Next Two Days Forecast</h3>
+  <app-hourly-forecast
+    [hourlyData]="forecastDays![0].hour"
+  ></app-hourly-forecast>
+  <h3>Next Forecast</h3>
   <div class="row justify-content-between">
     <div
       *ngFor="let forecastDay of forecastDays | slice : 1"
-      class="card shadow-sm col-md-6 col-12 forecast-card p-3"
+      class="col-md-6 col-12 p-2"
     >
-      <div class="mb-2">
-        {{ forecastDay.date | date : "EEEE d MMMM, yyyy" }}
-      </div>
-      <div class="row">
-        <div class="col-3 justify-content-center align-items-center">
-          <img [src]="forecastDay.day.condition.icon" alt="" />
-          <div style="font-size: 12px">
-            {{ forecastDay.day.condition.text }}
-          </div>
+      <div class="card shadow-sm forecast-card p-3">
+        <div class="mb-2">
+          {{ forecastDay.date | date : "EEEE d MMMM, yyyy" }}
         </div>
-        <div class="col-9 align-items-start">
-          <div class="row mb-2 justify-content-between">
-            <div class="col align-items-center">
-              <div>{{ forecastDay.day.maxtemp_c }}&deg;C</div>
-              <div>High</div>
-            </div>
-            <div class="col align-items-center">
-              <div>{{ forecastDay.day.maxwind_kph }}mph</div>
-              <div>Wind</div>
-            </div>
-            <div class="col align-items-center">
-              <div>{{ forecastDay.astro.sunrise }}</div>
-              <div>Sunrise</div>
+        <div class="row">
+          <div class="col-3 justify-content-center align-items-center">
+            <img [src]="forecastDay.day.condition.icon" alt="" />
+            <div style="font-size: 12px">
+              {{ forecastDay.day.condition.text }}
             </div>
           </div>
-          <div class="row mb-2 justify-content-between">
-            <div class="col align-items-center">
-              <div>{{ forecastDay.day.mintemp_c }}&deg;C</div>
-              <div>Low</div>
+          <div class="col-9 align-items-start">
+            <div class="row mb-2 justify-content-between">
+              <div class="col align-items-center">
+                <div>{{ forecastDay.day.maxtemp_c }}&deg;C</div>
+                <div>High</div>
+              </div>
+              <div class="col align-items-center">
+                <div>{{ forecastDay.day.maxwind_kph }}mph</div>
+                <div>Wind</div>
+              </div>
+              <div class="col align-items-center">
+                <div>{{ forecastDay.astro.sunrise }}</div>
+                <div>Sunrise</div>
+              </div>
             </div>
-            <div class="col align-items-center">
-              <div>{{ forecastDay.day.daily_chance_of_rain }}%</div>
-              <div>Rain</div>
+            <div class="row mb-2 justify-content-between">
+              <div class="col align-items-center">
+                <div>{{ forecastDay.day.mintemp_c }}&deg;C</div>
+                <div>Low</div>
+              </div>
+              <div class="col align-items-center">
+                <div>{{ forecastDay.day.daily_chance_of_rain }}%</div>
+                <div>Rain</div>
+              </div>
+              <div class="col align-items-center">
+                <div>{{ forecastDay.astro.sunset }}</div>
+                <div>Sunset</div>
+              </div>
             </div>
-            <div class="col align-items-center">
-              <div>{{ forecastDay.astro.sunset }}</div>
-              <div>Sunset</div>
-            </div>
-          </div>
-          <div class="row justify-content-end me-1">
-            <div class="col-4 btn btn-outline-secondary btn-sm">
-              Hourly
+            <div class="row justify-content-end me-1">
+              <div class="col-4 btn btn-outline-secondary btn-sm">Hourly</div>
             </div>
           </div>
         </div>
