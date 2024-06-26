@@ -36,11 +36,8 @@ export class CommodityService {
       accept: 'application/json',
       Authorization: `Bearer ${this.apikey}`,
     };
-    return this.http.get(
-      `${this.apiUrl}/get-commodity-prices/?states=${data.state}
-      &districts=${data.district}
-      &markets=${data.market}&date_from=2024-06-02&date_to=2024-06-26&commodity=${data.commodity}`,
-      { headers }
-    );
+    return this.http.post(`${this.apiUrl}/get-commodity-prices`, data, {
+      headers,
+    });
   }
 }

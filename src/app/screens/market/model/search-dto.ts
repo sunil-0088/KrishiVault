@@ -1,6 +1,8 @@
 export interface SearchDto {
   commodity: number;
-  state: number;
-  district: number;
-  market: number;
+  states: number;
+  districts: number;
+  markets: number;
+  date_from:string;
+  date_to:string
 }

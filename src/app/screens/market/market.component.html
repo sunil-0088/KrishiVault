@@ -2,7 +2,7 @@
   [formGroup]="agForm"
   class="row m-auto container-lg gx-3 gy-3 justify-content-end align-items-end"
 >
-  <div class="col-lg-3 col-md-3 col-sm-6">
+  <div class="col-lg-2 col-md-3 col-6">
     <label class="form-label" for="autoSizingSelect">Commodity</label>
     <select formControlName="commodity" class="form-select">
       <option [ngValue]="null" selected disabled>Select Commodity</option>
@@ -11,7 +11,7 @@
       </option>
     </select>
   </div>
-  <div class="col-lg-3 col-md-3 col-sm-6">
+  <div class="col-lg-2 col-md-3 col-6">
     <label class="form-label" for="autoSizingSelect">State</label>
     <select
       (change)="onStateChange($event)"
@@ -24,7 +24,7 @@
       </option>
     </select>
   </div>
-  <div class="col-lg-3 col-md-3 col-sm-6">
+  <div class="col-lg-2 col-md-3 col-6">
     <label class="form-label" for="autoSizingSelect">District</label>
     <select
       (change)="onDistrictChange($event)"
@@ -37,7 +37,7 @@
       </option>
     </select>
   </div>
-  <div class="col-lg-3 col-md-3 col-sm-6">
+  <div class="col-lg-2 col-md-3 col-6">
     <label class="form-label" for="autoSizingSelect">Maket</label>
     <select formControlName="market" class="form-select">
       <option [ngValue]="null" selected disabled>Select Market</option>
@@ -46,11 +46,32 @@
       </option>
     </select>
   </div>
-  <div class="d-grid col-lg-3 col-md-3 col-sm-6">
+  <div class="col-lg-2 col-md-3 col-6">
+    <label for="autoSizingInput">Date From</label>
+    <input
+      formControlName="dateFrom"
+      type="date"
+      class="form-control"
+      id="autoSizingInput"
+      placeholder="Jane Doe"
+    />
+  </div>
+  <div class="col-lg-2 col-md-3 col-6">
+    <label for="autoSizingInput">Date To</label>
+    <input
+      formControlName="dateTo"
+      type="date"
+      class="form-control"
+      id="autoSizingInput"
+      placeholder="Jane Doe"
+    />
+  </div>
+  <div class="col-lg-0 col-md-3 col-0"></div>
+  <div class="d-grid col-lg-2 col-md-3 col-6">
     <button (click)="onSearch()" class="btn btn-success">Search</button>
   </div>
 </form>
 
-<hr class="mt-5 mb-1" />
+<hr class="mt-4 mb-1" />
 
 <h3>Recent Search</h3>

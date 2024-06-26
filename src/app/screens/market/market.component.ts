@@ -133,6 +133,8 @@ export class MarketComponent implements OnInit {
       state: [null],
       district: [null],
       market: [null],
+      dateFrom: [new Date().toISOString().substring(0, 10)],
+      dateTo: [new Date().toISOString().substring(0, 10)],
     });
   }
   ngOnInit(): void {
