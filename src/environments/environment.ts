@@ -8,4 +8,10 @@ export const environment = {
     appId: '1:987807004572:web:3c100e5294a4b169e37a59',
     measurementId: 'G-KVPVFHL8CT',
   },
+
+  weatherApiKey: 'cacec25a4af840f9824143249242006',
+  weatherApiUrl: 'https://api.weatherapi.com/v1',
+
+  commodityApiUrl: 'https://api.ceda.ashoka.edu.in/agmarknet',
+  commodityApiKey: '0OKluzB4CVUPSmTgv4cECS6KYSEw2OpBtECWK0EMNY0',
 };

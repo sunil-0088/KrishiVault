@@ -1,0 +1,56 @@
+<form
+  [formGroup]="agForm"
+  class="row m-auto container-lg gx-3 gy-3 justify-content-end align-items-end"
+>
+  <div class="col-lg-3 col-md-3 col-sm-6">
+    <label class="form-label" for="autoSizingSelect">Commodity</label>
+    <select formControlName="commodity" class="form-select">
+      <option [ngValue]="null" selected disabled>Select Commodity</option>
+      <option *ngFor="let commodity of commodities" [value]="commodity.id">
+        {{ commodity.name }}
+      </option>
+    </select>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-6">
+    <label class="form-label" for="autoSizingSelect">State</label>
+    <select
+      (change)="onStateChange($event)"
+      formControlName="state"
+      class="form-select"
+    >
+      <option [ngValue]="null" selected disabled>Select State</option>
+      <option *ngFor="let state of states" [value]="state.id">
+        {{ state.name }}
+      </option>
+    </select>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-6">
+    <label class="form-label" for="autoSizingSelect">District</label>
+    <select
+      (change)="onDistrictChange($event)"
+      formControlName="district"
+      class="form-select"
+    >
+      <option [ngValue]="null" selected disabled>Select District</option>
+      <option *ngFor="let district of districts" [value]="district.id">
+        {{ district.name }}
+      </option>
+    </select>
+  </div>
+  <div class="col-lg-3 col-md-3 col-sm-6">
+    <label class="form-label" for="autoSizingSelect">Maket</label>
+    <select formControlName="market" class="form-select">
+      <option [ngValue]="null" selected disabled>Select Market</option>
+      <option *ngFor="let market of markets" [value]="market.id">
+        {{ market.name }}
+      </option>
+    </select>
+  </div>
+  <div class="d-grid col-lg-3 col-md-3 col-sm-6">
+    <button (click)="onSearch()" class="btn btn-success">Search</button>
+  </div>
+</form>
+
+<hr class="mt-5 mb-1" />
+
+<h3>Recent Search</h3>

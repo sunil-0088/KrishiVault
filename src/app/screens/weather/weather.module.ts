@@ -8,9 +8,19 @@ import { ChartModule } from 'primeng/chart';
 import { HourlyForecastComponent } from './components/hourly-forecast/hourly-forecast.component';
 import { HistoricalDataComponent } from './components/historical-data/historical-data.component'; 
 
-
 @NgModule({
-  declarations: [WeatherComponent, CurrentWeatherComponent, ForecastComponent, HourlyForecastComponent, HistoricalDataComponent],
-  imports: [CommonModule, FormsModule,ReactiveFormsModule,ChartModule],
+  declarations: [
+    WeatherComponent,
+    CurrentWeatherComponent,
+    ForecastComponent,
+    HourlyForecastComponent,
+    HistoricalDataComponent,
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ChartModule,
+  ],
 })
 export class WeatherModule {}

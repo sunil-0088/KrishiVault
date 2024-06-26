@@ -31,8 +31,7 @@ export class WeatherComponent implements OnInit {
 
   ngOnInit(): void {
     // Subscribe to the subject with debounceTime
-    this.getDeviceLocation();
-
+    // this.getDeviceLocation();
     this.searchSubject
       .pipe(
         debounceTime(300), // Adjust the debounce time as needed

@@ -1,18 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherService {
+  private apiKey = environment.weatherApiKey;
+  private apiUrl = environment.weatherApiUrl;
 
-  private apiKey = 'cacec25a4af840f9824143249242006';
-  private apiUrl = 'https://api.weatherapi.com/v1';
-
-  constructor(public http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   getWeatherByLocation(location: string): Observable<any> {
     return this.http.get(
@@ -32,7 +31,7 @@ export class WeatherService {
     );
   }
 
-  getSearchLocations(location:string){
+  getSearchLocations(location: string) {
     return this.http.get(
       `${this.apiUrl}/search.json?key=${this.apiKey}&q=${location}'`
     );
