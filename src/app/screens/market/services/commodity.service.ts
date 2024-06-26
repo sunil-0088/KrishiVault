@@ -4,7 +4,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SearchDto } from '../model/search-dto';
-import { start } from '@popperjs/core';
 
 @Injectable({
   providedIn: 'root',
@@ -38,11 +37,9 @@ export class CommodityService {
       Authorization: `Bearer ${this.apikey}`,
     };
     return this.http.get(
-      `${this.apiUrl}/get-commodity-prices/?states=${[data.state]}
-      &districts=${[data.district]}
-      &markets=${[
-        data.market,
-      ]}&date_from=2024-06-02&date_to=2024-06-26&commodity=${data.commodity}`,
+      `${this.apiUrl}/get-commodity-prices/?states=${data.state}
+      &districts=${data.district}
+      &markets=${data.market}&date_from=2024-06-02&date_to=2024-06-26&commodity=${data.commodity}`,
       { headers }
     );
   }
