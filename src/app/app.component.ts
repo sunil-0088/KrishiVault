@@ -17,6 +17,7 @@ import 'firebase/auth';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  [x: string]: any;
   loginForm: FormGroup;
   registerForm: FormGroup;
   showRegister = false;

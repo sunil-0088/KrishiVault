@@ -1,6 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { GoogleAuthProvider } from 'firebase/auth';
+
 
 @Component({
   selector: 'app-auth',
@@ -8,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent {
- 
+
   loginForm: FormGroup;
   registerForm: FormGroup;
   showRegister = false;
@@ -55,10 +57,24 @@ export class AuthComponent {
     this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((user) => {
+        user.user?.sendEmailVerification().then(() => {
+          alert('Verification email sent!');
+        });
         console.log('Registration successful:', user);
       })
       .catch((error) => {
         console.error('Registration error:', error);
+      });
+  }
+
+  signInWithGoogle() {
+    
+    this.afAuth.signInWithPopup(new GoogleAuthProvider())
+      .then((result) => {
+        console.log('Google sign-in successful:', result);
+      })
+      .catch((error) => {
+        console.error('Google sign-in error:', error);
       });
   }
 }

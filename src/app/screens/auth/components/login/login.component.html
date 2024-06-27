@@ -1,1 +1,45 @@
-<p>login works!</p>
+<form *ngIf="loginForm" [formGroup]="loginForm">
+  <div class="container col align-items-center">
+    <div class="w-100 mb-2">
+      <h5 class="text-secondary-emphasis">Let's Get Started</h5>
+      <h6 class="text-secondary">Sign up your account</h6>
+    </div>
+    <div class="w-100">
+      <input
+        class="form-control form-control"
+        type="text"
+        formControlName="email"
+        placeholder="Email"
+      />
+
+      <div class="col align-items-end mt-2">
+        <input
+          type="password"
+          class="form-control form-control"
+          formControlName="password"
+          placeholder="Password"
+        />
+        <a class="btn btn-link" routerLink="/auth/forgot-password"
+          >Forgot Password?</a
+        >
+      </div>
+    </div>
+    <button class="btn btn-primary text-light w-100" (click)="login()">
+      Continue
+    </button>
+
+    <hr />
+    <div class="text-center">
+      <button type="button" class="btn btn-outline-secondary">
+        <img height="16" src="assets/google.svg" alt="" />
+        Continue With Google
+      </button>
+
+      <div class="mt-2">
+        <a class="btn btn-link" routerLink="/auth/sign-up"
+          >Don't have an account?</a
+        >
+      </div>
+    </div>
+  </div>
+</form>
