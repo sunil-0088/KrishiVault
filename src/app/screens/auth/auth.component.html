@@ -1,12 +1,12 @@
-<!-- <div class="container">
+<div class="container">
   <div class=" auth-container row align-items-center">
     <div class=" col-md-6 d-none d-md-block auth-image">
       <img src="assets/login.svg" class="img-fluid" alt="Responsive image" />
       <h1>Krishi Vault</h1>
     </div>
 
-    <div class="col-md-6"><router-outlet></router-outlet></div>
-    <div class="col-md-6" [@slideInRight]="signInState">
+    <!-- <div class="col-md-6"><router-outlet></router-outlet></div> -->
+    <div class="col-md-6" >
       <div class="text-center mb-3">
         <img height="50" src="assets/logo-wn.svg" alt="Logo" class="img-fluid mb-3">
       </div>
@@ -23,7 +23,7 @@
       </form>
       <button class="btn btn-link btn-block" (click)="showRegistration()">Create New Account</button>
 
-      <div *ngIf="showRegister" [@slideInOut]>
+      <div *ngIf="showRegister" >
         <form [formGroup]="registerForm" (ngSubmit)="register()">
           <div class="form-group">
             <label for="reg-email">Email:</label>
@@ -42,10 +42,10 @@
       </div>
 
       <div class="text-center mt-3">
-        <button class="btn btn-danger btn-block" (click)="googleSignIn()">
+        <button class="btn btn-danger btn-block">
           Sign in with Google
         </button>
       </div>
     </div>
   </div>
-</div> -->
+</div>

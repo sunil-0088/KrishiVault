@@ -10,7 +10,7 @@ import { MarketComponent } from './screens/market/market.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/auth',
     pathMatch: 'full',
   },
   {

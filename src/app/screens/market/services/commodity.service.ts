@@ -36,7 +36,7 @@ export class CommodityService {
       accept: 'application/json',
       Authorization: `Bearer ${this.apikey}`,
     };
-    return this.http.post(`${this.apiUrl}/get-commodity-prices`, data, {
+    return this.http.post(`${this.apiUrl}/get-commodity-prices/`, data, {
       headers,
     });
   }

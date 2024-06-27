@@ -9,6 +9,7 @@ import {
   State,
 } from './model/commodity-areas';
 import { MarketData } from './model/market-data';
+import { SearchDto } from './model/search-dto';
 
 @Component({
   selector: 'app-market',
@@ -140,7 +141,6 @@ export class MarketComponent implements OnInit {
   ngOnInit(): void {
     this.commodityService.fetchCommodities().subscribe((data) => {
       this.commodities = data;
-      console.log(this.commodities);
     });
 
     this.agForm.get('commodity')?.valueChanges.subscribe((selectedValue) => {
@@ -150,6 +150,8 @@ export class MarketComponent implements OnInit {
         .subscribe((data) => {
           this.areas = data;
           this.states = this.areas?.states!;
+          console.log(this.states);
+
         });
     });
   }
@@ -170,7 +172,18 @@ export class MarketComponent implements OnInit {
   }
 
   onSearch() {
-    console.log(this.agForm.value);
+    let formValues=this.agForm.value;
+    
+    var serchData:SearchDto={
+      commodity:+formValues.commodity,
+      states:[+formValues.state],
+      districts:[+formValues.district],
+      markets:[+formValues.market],
+      date_from:formValues.dateFrom,
+      date_to:formValues.dateTo
+    }
+    console.log(serchData);
+    
     this.commodityService.GetCommodityPrices(this.agForm.value).subscribe(
       (data) => {
         console.log(data);

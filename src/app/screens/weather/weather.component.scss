@@ -1,12 +1,16 @@
 .w-container {
   width: 100%;
-  max-width:1024px;
+  max-width: 1024px;
   height: 100%;
   padding: 20px;
   overflow-y: auto;
   align-items: center;
+  margin: 0 auto;
 }
-
+.w-container::-webkit-scrollbar {
+  width: 0px; 
+  background: transparent; 
+}
 .input-group {
   margin-bottom: 20px;
 }
