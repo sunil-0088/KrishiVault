@@ -1,59 +1,51 @@
 <form *ngIf="signupForm" [formGroup]="signupForm">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header">Sign up</div>
-          <div class="card-body">
-            <div class="form-group">
-              <label for="displayName">Name</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="displayName"
-                placeholder="Name"
-              />
-            </div>
-            <div class="form-group mt-3">
-              <label for="email">Email</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="email"
-                placeholder="Email"
-              />
-            </div>
-            <div class="form-group mt-3">
-              <label for="password">Password</label>
-              <input
-                type="password"
-                class="form-control"
-                formControlName="password"
-                placeholder="Password"
-              />
-            </div>
-            <div class="form-group mt-3">
-              <label for="confirmPassword">Confirm Password</label>
-              <input
-                type="password"
-                class="form-control"
-                formControlName="confirmPassword"
-                placeholder="Confirm Password"
-              />
-            </div>
-          </div>
-          <div class="card-footer text-center">
-            <button type="button" class="btn btn-primary" (click)="signup()">
-              Sign up
-            </button>
-            <div class="mt-2">
-              <a class="btn btn-link" routerLink="/auth/login"
-                >Already have an account? Click Here</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="container col align-items-center">
+    <div class="w-100 mb-2">
+      <h5 class="text-secondary-emphasis">Let's Get Started</h5>
+      <h6 class="text-secondary">Sign up your account</h6>
+    </div>
+    <div class="w-100 my-3">
+      <input
+        type="text"
+        class="form-control my-3"
+        formControlName="displayName"
+        placeholder="Name"
+      />
+      <input
+        type="text"
+        class="form-control my-3"
+        formControlName="email"
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        class="form-control my-3"
+        formControlName="password"
+        placeholder="Password"
+      />
+      <input
+        type="password"
+        class="form-control my-3"
+        formControlName="confirmPassword"
+        placeholder="Confirm Password"
+      />
+    </div>
+  </div>
+  <button class="btn btn-primary text-light w-100" (click)="signup()">
+    Sign up
+  </button>
+
+  <hr />
+  <div class="text-center">
+    <button type="button" class="btn btn-outline-secondary google-btn">
+      <img height="16" src="assets/google.svg" alt="" />
+      Continue With Google
+    </button>
+
+    <div class="mt-2">
+      <a class="btn btn-link" routerLink="/auth/login"
+        >Already have an account?</a
+      >
     </div>
   </div>
 </form>

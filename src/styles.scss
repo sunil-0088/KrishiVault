@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-$primary:#209e41;
+$primary: #209e41;
 @import "bootstrap/scss/bootstrap";
 
 // $secondary: #your-desired-secondary-color;
@@ -45,11 +45,18 @@ body {
   overflow-y: auto;
 }
 
-.row{
-  display: flex;
-}
+// .row {
+//   display: flex;
+// }
 
-.col{
-  display: flex;
-  flex-direction: column;
+// .col {
+//   display: flex;
+//   flex-direction: column;
+// }
+
+hr {
+  width: 100%;
+  border: 1px solid rgb(56, 56, 56);
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

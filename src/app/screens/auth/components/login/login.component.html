@@ -1,10 +1,10 @@
 <form *ngIf="loginForm" [formGroup]="loginForm">
   <div class="container col align-items-center">
     <div class="w-100 mb-2">
-      <h5 class="text-secondary-emphasis">Let's Get Started</h5>
-      <h6 class="text-secondary">Sign up your account</h6>
+      <h5 class="text-secondary-emphasis">Welcome back 👋</h5>
+      <h6 class="text-secondary">Log in your account</h6>
     </div>
-    <div class="w-100">
+    <div class="w-100 my-3">
       <input
         class="form-control form-control"
         type="text"
@@ -12,7 +12,7 @@
         placeholder="Email"
       />
 
-      <div class="col align-items-end mt-2">
+      <div class="d-flex flex-column align-items-end mt-3">
         <input
           type="password"
           class="form-control form-control"
@@ -28,9 +28,9 @@
       Continue
     </button>
 
-    <hr />
+    <hr>
     <div class="text-center">
-      <button type="button" class="btn btn-outline-secondary">
+      <button type="button" class="btn btn-outline-secondary google-btn">
         <img height="16" src="assets/google.svg" alt="" />
         Continue With Google
       </button>
