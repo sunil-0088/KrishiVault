@@ -22,10 +22,14 @@ export class LoginComponent implements OnInit {
   }
   login() {
     if (this.loginForm!.valid) {
-      this.authService.SignIn(
+      this.authService.emailSignIn(
         this.loginForm!.value.email,
         this.loginForm!.value.password
       );
     }
+  }
+
+  googleAuth(){
+    this.authService.googleSignIn();
   }
 }

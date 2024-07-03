@@ -23,7 +23,7 @@ export class SignUpComponent implements OnInit {
   }
   signup() {
     if (this.signupForm!.valid) {
-      this.authService.SignUp(
+      this.authService.emailSignUp(
         this.signupForm!.value.email,
         this.signupForm!.value.password
       );
