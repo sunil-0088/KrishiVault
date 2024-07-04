@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -9,24 +14,54 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignUpComponent implements OnInit {
   signupForm: FormGroup | undefined;
-  constructor(private authService: AuthService) {}
+
+  isLoading = false;
+  isGoogleLogin = false;
+
+  constructor(private authService: AuthService, private fb: FormBuilder) {}
   ngOnInit(): void {
     this.createForm();
   }
-  createForm() {
-    this.signupForm = new FormGroup({
-      email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-      confirmPassword: new FormControl('', Validators.required),
-      displayName: new FormControl('', Validators.required),
-    });
+  get email() {
+    return this.signupForm!.get('email');
   }
-  signup() {
+  get password() {
+    return this.signupForm!.get('password');
+  }
+
+  get confirmPassword() {
+    return this.signupForm!.get('confirmPassword');
+  }
+  createForm() {
+    this.signupForm = this.fb.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', [Validators.required]],
+      }
+    );
+  }
+
+  get passwordMatch() {
+    return (
+      this.password?.value == this.confirmPassword?.value
+    );
+  }
+  async signup() {
     if (this.signupForm!.valid) {
-      this.authService.emailSignUp(
+      this.isLoading = true;
+      await this.authService.emailSignUp(
         this.signupForm!.value.email,
         this.signupForm!.value.password
       );
+      this.isLoading = false;
+    } else {
+      this.signupForm!.markAllAsTouched();
     }
+  }
+  async googleAuth() {
+    this.isGoogleLogin = true;
+    await this.authService.googleSignIn();
+    this.isGoogleLogin = false;
   }
 }

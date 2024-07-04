@@ -5,47 +5,102 @@
       <h6 class="text-secondary">Sign up your account</h6>
     </div>
     <div class="w-100 my-3">
-      <input
-        type="text"
-        class="form-control my-3"
-        formControlName="displayName"
-        placeholder="Full Name"
-      />
-      <input
-        type="text"
-        class="form-control my-3"
-        formControlName="email"
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        class="form-control my-3"
-        formControlName="password"
-        placeholder="Password"
-      />
-      <input
-        type="password"
-        class="form-control my-3"
-        formControlName="confirmPassword"
-        placeholder="Confirm Password"
-      />
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          [class.is-invalid]="email!.invalid && email!.touched"
+          formControlName="email"
+          placeholder="Email"
+          id="validationEmail"
+          required
+        />
+        <div *ngIf="email?.invalid && email?.touched" class="invalid-feedback">
+          <div *ngIf="email?.errors?.['required']">Email is required.</div>
+          <div *ngIf="email?.errors?.['email']">
+            Please enter a valid email.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group my-3">
+        <input
+          type="password"
+          class="form-control"
+          [class.is-invalid]="password!.invalid && password!.touched"
+          formControlName="password"
+          placeholder="Password"
+        />
+        <div
+          *ngIf="password!.invalid && password!.touched"
+          class="invalid-feedback"
+        >
+          <div *ngIf="password!.errors?.['required']">
+            Password is required.
+          </div>
+          <div *ngIf="password!.errors?.['minlength']">
+            Password must be at least 6 characters long.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group my-3">
+        <input
+          type="password"
+          class="form-control"
+          [class.is-invalid]="
+            confirmPassword!.invalid && confirmPassword!.touched
+          "
+          formControlName="confirmPassword"
+          placeholder="Confirm Password"
+        />
+        <div
+          *ngIf="confirmPassword?.invalid && confirmPassword?.touched"
+          class="invalid-feedback"
+        >
+          <div *ngIf="confirmPassword?.errors?.['required']">
+            Confirm Password is required.
+          </div>
+        </div>
+        <div
+          *ngIf="confirmPassword?.valid && confirmPassword?.touched"
+          class="invalid-feedback"
+        >
+          <div>Passwords do not match.</div>
+        </div>
+      </div>
     </div>
   </div>
-  <button class="btn btn-primary text-light w-100" (click)="signup()">
-    Sign up
+
+  <button
+    class="btn btn-primary text-light w-100"
+    [disabled]="isLoading || isGoogleLogin || signupForm.invalid"
+    (click)="signup()"
+  >
+    <span
+      *ngIf="isLoading; else loaded"
+      class="spinner-border spinner-border-sm"
+      aria-hidden="true"
+    ></span>
+    <ng-template #loaded> <span>Sign Up</span></ng-template>
   </button>
 
   <hr />
   <div class="text-center">
-    <button type="button" class="btn btn-outline-secondary google-btn">
+    <button
+      type="button"
+      (click)="googleAuth()"
+      class="btn btn-outline-secondary google-btn"
+      [disabled]="isLoading || isGoogleLogin"
+    >
       <img height="16" src="assets/google.svg" alt="" />
       Continue With Google
     </button>
 
     <div class="mt-2">
-      <a class="btn btn-link" routerLink="/auth/login"
-        >Already have an account?</a
-      >
+      <button class="text-button" routerLink="/auth/login">
+        Already have an account?
+      </button>
     </div>
   </div>
 </form>

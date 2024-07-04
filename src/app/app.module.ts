@@ -34,7 +34,7 @@ import { ToastrModule } from 'ngx-toastr';
       positionClass: 'toast-top-right',
       preventDuplicates: true,
       closeButton: true,
-      timeOut: 3000,
+      timeOut: 5000,
       tapToDismiss: true,
       toastClass: 'ngx-toastr custom-toastr',
     }),

@@ -60,3 +60,24 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.text-button {
+  background: none;
+  border: none;
+  color: rgb(36, 143, 36);
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.text-button:hover {
+  color: green;
+}
+
+.text-button:focus {
+  outline: none;
+}
+
+.text-button:disabled {
+  color: #858585;
+}

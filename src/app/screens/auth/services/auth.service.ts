@@ -63,15 +63,13 @@ export class AuthService {
       );
 
       await credential.user?.sendEmailVerification();
-
       await this.afAuth.signOut();
       this.taostr.success(
         'Sign up successful. Please check your email to verify your account.'
       );
       return this.updateUserData(credential.user);
     } catch (error: any) {
-      console.error('Sign up error:', error.code);
-      this.taostr.error(error.message);
+      this.taostr.error(this.getCustomErrorMessage(error.code));
     }
   }
 
@@ -81,26 +79,20 @@ export class AuthService {
         email,
         password
       );
-
       if (!credential.user?.emailVerified) {
+        // await credential.user?.sendEmailVerification();
         await this.afAuth.signOut();
         this.taostr.error('Please verify your email before Login.');
         return;
       }
       return this.updateUserData(credential.user);
     } catch (error: any) {
-      if (error.code === 'auth/invalid-credential') {
-        this.taostr.error('Invalid Credential!, Check your email or password');
-        return;
-      } else {
-        this.taostr.error(error.message);
-        return;
-      }
+      this.taostr.error(this.getCustomErrorMessage(error.code));
+      return;
     }
   }
 
   private async updateUserData(user: any) {
-    debugger;
     const userRef = this.afs.doc<User>(`users/${user.uid}`);
     const data = {
       uid: user.uid,
@@ -130,16 +122,12 @@ export class AuthService {
         this.taostr.success('Password reset email sent, check your inbox.');
         return;
       } else {
-        this.taostr.info(
-          'Entered Email is not associated with an account !'
-        );
+        this.taostr.info(this.getCustomErrorMessage('auth/user-not-found'));
       }
       console.log(isUserExits);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error sending password reset email:', error);
-      this.taostr.info(
-        'An error occurred while resetting your password. Please try again.'
-      );
+      this.taostr.info(this.getCustomErrorMessage(error.code));
     } finally {
       return;
     }
@@ -150,5 +138,46 @@ export class AuthService {
       .get()
       .toPromise();
     return !querySnapshot!.empty;
+  }
+
+  getCustomErrorMessage(errorCode: string) {
+    switch (errorCode) {
+      case 'auth/email-already-in-use':
+        return 'The email address is already in use.';
+      case 'auth/invalid-email':
+        return 'The email address is not valid.';
+      case 'auth/operation-not-allowed':
+        return 'Operation not allowed. Please contact support.';
+      case 'auth/weak-password':
+        return 'The password is too weak.';
+      case 'auth/user-disabled':
+        return 'This user account has been disabled.';
+      case 'auth/user-not-found':
+        return 'No user found with this email.';
+      case 'auth/wrong-password':
+        return 'Incorrect password.';
+      case 'auth/invalid-verification-code':
+        return 'The verification code is not valid.';
+      case 'auth/invalid-verification-id':
+        return 'The verification ID is not valid.';
+      case 'auth/credential-already-in-use':
+        return 'This credential is already associated with a different user account.';
+      case 'auth/invalid-credential':
+        return 'The credential is not valid.';
+      case 'auth/account-exists-with-different-credential':
+        return 'An account already exists with the same email but different sign-in credentials. Please sign in using the original method.';
+      case 'auth/requires-recent-login':
+        return 'This operation requires a recent login. Please log in again.';
+      case 'auth/too-many-requests':
+        return 'We have detected too many requests from your device. Please try again later.';
+      case 'auth/timeout':
+        return 'The operation has timed out. Please try again.';
+      case 'auth/network-request-failed':
+        return 'Network error. Please check your internet connection and try again.';
+      case 'auth/internal-error':
+        return 'An internal error has occurred. Please try again.';
+      default:
+        return 'An unknown error occurred. Please try again.';
+    }
   }
 }
