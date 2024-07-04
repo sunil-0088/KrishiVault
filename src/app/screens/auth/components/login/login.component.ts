@@ -10,6 +10,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup | undefined;
+  isLoading = false;
+  isGoogleLogin=false;
+
   constructor(private router: Router, private authService: AuthService) {}
   ngOnInit(): void {
     this.createLoginForm();
@@ -20,16 +23,20 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', Validators.required),
     });
   }
-  login() {
+  async login() {
     if (this.loginForm!.valid) {
-      this.authService.emailSignIn(
+      this.isLoading = true;
+      await this.authService.emailSignIn(
         this.loginForm!.value.email,
         this.loginForm!.value.password
       );
+      this.isLoading = false;
     }
   }
 
-  googleAuth(){
-    this.authService.googleSignIn();
+  async googleAuth() {
+    this.isGoogleLogin = true;
+    await this.authService.googleSignIn();
+    this.isGoogleLogin = false;
   }
 }

@@ -36,7 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
       closeButton: true,
       timeOut: 3000,
       tapToDismiss: true,
-
+      toastClass: 'ngx-toastr custom-toastr',
     }),
   ],
   providers: [],

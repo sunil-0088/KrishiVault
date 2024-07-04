@@ -24,13 +24,28 @@
         >
       </div>
     </div>
-    <button class="btn btn-primary text-light w-100" (click)="login()">
-      Continue
+    <button
+      class="btn btn-primary text-light w-100"
+      [disabled]="isLoading || isGoogleLogin"
+      (click)="login()"
+    >
+      <span
+        *ngIf="isLoading; else loaded"
+        class="spinner-border spinner-border-sm"
+        aria-hidden="true"
+      ></span>
+
+      <ng-template #loaded> <span>Sign In</span></ng-template>
     </button>
 
-    <hr>
+    <hr />
     <div class="text-center">
-      <button type="button"  (click)="googleAuth()" class="btn btn-outline-secondary google-btn">
+      <button
+        type="button"
+        (click)="googleAuth()"
+        class="btn btn-outline-secondary google-btn"
+        [disabled]="isLoading || isGoogleLogin"
+      >
         <img height="16" src="assets/google.svg" alt="" />
         Continue With Google
       </button>

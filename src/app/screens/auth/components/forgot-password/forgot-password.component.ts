@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./forgot-password.component.scss'],
 })
 export class ForgotPasswordComponent {
+  isLoading:boolean=false;
   resetForm: FormGroup | undefined;
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
@@ -15,9 +16,12 @@ export class ForgotPasswordComponent {
       email: new FormControl('', Validators.required),
     });
   }
-  sendResetLink() {
+  async sendResetLink() {
     if (this.resetForm!.valid) {
-      this.authService.ForgotPassword(this.resetForm!.value.email);
+      this.isLoading=true;
+       await this.authService.ForgotPassword(this.resetForm!.value.email);
+       this.resetForm?.reset();
+       this.isLoading=false;
     }
   }
 }
