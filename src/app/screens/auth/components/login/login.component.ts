@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,17 +16,28 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup | undefined;
   isLoading = false;
-  isGoogleLogin=false;
+  isGoogleLogin = false;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private fb: FormBuilder
+  ) {}
   ngOnInit(): void {
     this.createLoginForm();
   }
   createLoginForm() {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
+  }
+
+  get email() {
+    return this.loginForm!.get('email');
+  }
+  get password() {
+    return this.loginForm!.get('password');
   }
   async login() {
     if (this.loginForm!.valid) {

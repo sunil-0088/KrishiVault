@@ -49,20 +49,21 @@
           type="password"
           class="form-control"
           [class.is-invalid]="
-            confirmPassword!.invalid && confirmPassword!.touched
+            (confirmPassword!.invalid && confirmPassword!.touched)||signupForm.errors?.['passwordmatcherror']
           "
           formControlName="confirmPassword"
           placeholder="Confirm Password"
         />
-        <div *ngIf="confirmPassword?.touched" class="invalid-feedback" style="display: block;" >
+        <div
+          *ngIf="confirmPassword?.touched"
+          class="invalid-feedback"
+          style="display: block"
+        >
           <div *ngIf="confirmPassword?.errors?.['required'];else passwordMatch">
             Confirm Password is required.
           </div>
           <ng-template #passwordMatch>
-            <div
-              *ngIf="signupForm?.errors?.['passwordmatcherror']"
-
-            >
+            <div *ngIf="signupForm?.errors?.['passwordmatcherror']">
               Passwords do not match.
             </div>
           </ng-template>

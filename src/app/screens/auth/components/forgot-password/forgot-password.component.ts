@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -10,11 +10,14 @@ import { AuthService } from '../../services/auth.service';
 export class ForgotPasswordComponent {
   isLoading:boolean=false;
   resetForm: FormGroup | undefined;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private fb: FormBuilder) {}
   ngOnInit(): void {
-    this.resetForm = new FormGroup({
-      email: new FormControl('', Validators.required),
+    this.resetForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
     });
+  }
+  get email(){
+    return this.resetForm?.get('email')
   }
   async sendResetLink() {
     if (this.resetForm!.valid) {
