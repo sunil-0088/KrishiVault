@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  AbstractControl,
+  AbstractControlOptions,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
+
 import {
   FormBuilder,
   FormControl,
@@ -6,6 +13,19 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+
+export const PasswordValidator: ValidatorFn = (
+  control: AbstractControl
+): ValidationErrors | null => {
+  const password = control.get('password');
+  const confirmpassword = control.get('confirmPassword');
+  if (password && confirmpassword && password.value != confirmpassword.value) {
+    return {
+      passwordmatcherror: true,
+    };
+  }
+  return null;
+};
 
 @Component({
   selector: 'app-sign-up',
@@ -38,15 +58,11 @@ export class SignUpComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
-      }
+      },
+      { validators: PasswordValidator } as AbstractControlOptions
     );
   }
 
-  get passwordMatch() {
-    return (
-      this.password?.value == this.confirmPassword?.value
-    );
-  }
   async signup() {
     if (this.signupForm!.valid) {
       this.isLoading = true;

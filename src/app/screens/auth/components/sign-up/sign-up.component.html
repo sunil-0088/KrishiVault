@@ -54,19 +54,18 @@
           formControlName="confirmPassword"
           placeholder="Confirm Password"
         />
-        <div
-          *ngIf="confirmPassword?.invalid && confirmPassword?.touched"
-          class="invalid-feedback"
-        >
-          <div *ngIf="confirmPassword?.errors?.['required']">
+        <div *ngIf="confirmPassword?.touched" class="invalid-feedback" style="display: block;" >
+          <div *ngIf="confirmPassword?.errors?.['required'];else passwordMatch">
             Confirm Password is required.
           </div>
-        </div>
-        <div
-          *ngIf="confirmPassword?.valid && confirmPassword?.touched"
-          class="invalid-feedback"
-        >
-          <div>Passwords do not match.</div>
+          <ng-template #passwordMatch>
+            <div
+              *ngIf="signupForm?.errors?.['passwordmatcherror']"
+
+            >
+              Passwords do not match.
+            </div>
+          </ng-template>
         </div>
       </div>
     </div>
