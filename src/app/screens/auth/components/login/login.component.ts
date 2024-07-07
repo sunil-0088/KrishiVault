@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import {
@@ -7,22 +7,26 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { User } from '../../modal/user';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup | undefined;
   isLoading = false;
   isGoogleLogin = false;
+  private userSubscription!: Subscription;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private fb: FormBuilder
   ) {}
+
   ngOnInit(): void {
     this.createLoginForm();
   }
@@ -46,6 +50,13 @@ export class LoginComponent implements OnInit {
         this.loginForm!.value.email,
         this.loginForm!.value.password
       );
+      this.userSubscription = this.authService.user$.subscribe((data) => {
+        if (data?.role) {
+          this.router.navigate(['/home']);
+        } else {
+          this.router.navigate(['/auth/role-details']);
+        }
+      });
       this.isLoading = false;
     }
   }
@@ -53,6 +64,19 @@ export class LoginComponent implements OnInit {
   async googleAuth() {
     this.isGoogleLogin = true;
     await this.authService.googleSignIn();
+   this.userSubscription= this.authService.user$.subscribe((data) => {
+      if (data?.role) {
+        this.router.navigate(['/home']);
+      } else {
+        this.router.navigate(['/auth/role-details']);
+      }
+    });
     this.isGoogleLogin = false;
+  }
+
+  ngOnDestroy(): void {
+    if(this.userSubscription){
+      this.userSubscription.unsubscribe();
+    }
   }
 }

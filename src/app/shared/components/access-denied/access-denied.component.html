@@ -1,0 +1,25 @@
+<div
+  class="container-fluid d-flex flex-column justify-content-center align-items-center h-100 text-center"
+>
+  <img class="d-md-none d-block small-Image " src="/assets/404.svg" alt="404 Image" />
+  <div class="row w-100">
+    <div class="col-md-6 d-none d-md-block">
+      <img
+        src="/assets/404.svg"
+        class="img-fluid d-none d-md-block"
+        alt="404 Image"
+      />
+    </div>
+    <div
+      class="col-12 col-md-6 mb-3 d-flex flex-column justify-content-center align-items-center"
+    >
+      <h1 class="text-success">Looks like you got lost...</h1>
+      <p>Let us help guide you out and get you back home.</p>
+      <div class="w-auto">
+        <button class="btn btn-success" (click)="goHome()">
+          <i class="bi bi-house"></i> Go Home
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

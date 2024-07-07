@@ -1,4 +1,10 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {
   AbstractControl,
   AbstractControlOptions,
@@ -13,6 +19,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 export const PasswordValidator: ValidatorFn = (
   control: AbstractControl
@@ -32,13 +40,19 @@ export const PasswordValidator: ValidatorFn = (
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, OnDestroy {
   signupForm: FormGroup | undefined;
 
   isLoading = false;
   isGoogleLogin = false;
 
-  constructor(private authService: AuthService, private fb: FormBuilder) {}
+  private userSubscription!: Subscription;
+
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.createForm();
   }
@@ -78,6 +92,19 @@ export class SignUpComponent implements OnInit {
   async googleAuth() {
     this.isGoogleLogin = true;
     await this.authService.googleSignIn();
+    this.userSubscription = this.authService.user$.subscribe((data) => {
+      if (data?.role) {
+        this.router.navigate(['/home']);
+      } else {
+        this.router.navigate(['/auth/role-details']);
+      }
+    });
     this.isGoogleLogin = false;
+  }
+
+  ngOnDestroy(): void {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 }

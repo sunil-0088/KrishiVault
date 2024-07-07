@@ -70,7 +70,6 @@ hr {
   text-decoration: underline;
 }
 
-
 .text-button:hover {
   color: green;
 }
@@ -81,4 +80,8 @@ hr {
 
 .text-button:disabled {
   color: #858585;
+}
+
+.btn-primary {
+  color: white !important;
 }

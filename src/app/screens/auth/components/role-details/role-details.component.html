@@ -18,17 +18,31 @@
             Your photo should be in PNG or JPG format
           </div>
         </div>
-        <div class="row d-flex justify-content-center m-0">
-          <button (click)="selectFile()" class="col-6 btn text-success">
-            Choose
-          </button>
+        <div class="d-flex justify-content-start mt-1 gap-2">
+          <div class="w-auto">
+            <button
+              [disabled]="isLoading"
+              (click)="selectFile()"
+              class="btn btn-outline-success btn-sm"
+            >
+              Choose
+            </button>
+          </div>
           <input
             type="file"
             #fileInput
             (change)="onFileSelected($event)"
             accept="image/*"
           />
-          <button class="col-6 btn text-danger fw-bold">Remove</button>
+          <div class="">
+            <button
+              [disabled]="isLoading"
+              class="btn btn-outline-danger btn-sm "
+              (click)="removeFile()"
+            >
+              Remove
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -71,7 +85,14 @@
   </form>
 
   <div class="d-flex gap-3 justify-content-end">
-    <button class="btn btn-danger">Cancel</button>
-    <button class="btn btn-success" (click)="onSubmit()">Submit</button>
+    <button [disabled]="isLoading" class="btn btn-danger btn-sm">Cancel</button>
+    <button [disabled]="isLoading" class="btn btn-success btn-sm" (click)="onSubmit()">
+      <span
+        *ngIf="isLoading; else loaded"
+        class="spinner-border spinner-border-sm"
+        aria-hidden="true"
+      ></span>
+      <ng-template #loaded> <span>Sign Up</span></ng-template>
+    </button>
   </div>
 </div>

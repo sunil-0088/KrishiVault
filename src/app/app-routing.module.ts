@@ -6,6 +6,10 @@ import { HomeComponent } from './screens/home/home.component';
 import { AboutUsComponent } from './screens/about-us/about-us.component';
 import { WeatherComponent } from './screens/weather/weather.component';
 import { MarketComponent } from './screens/market/market.component';
+import { FarmerComponent } from './screens/farmer/farmer.component';
+import { BrokerComponent } from './screens/broker/broker.component';
+import { AccessDeniedComponent } from './shared/components/access-denied/access-denied.component';
+import { roleGuard } from './shared/guards/role.guard';
 
 const routes: Routes = [
   {
@@ -49,13 +53,30 @@ const routes: Routes = [
       import('./screens/market/market.module').then((m) => m.MarketModule),
     component: MarketComponent,
   },
+  {
+    path: 'farmer',
+    loadChildren: () =>
+      import('./screens/farmer/farmer.module').then((m) => m.FarmerModule),
+    component: FarmerComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'farmer' },
+  },
+  {
+    path: 'broker',
+    loadChildren: () =>
+      import('./screens/broker/broker.module').then((m) => m.BrokerModule),
+    component: BrokerComponent,
+    canActivate: [roleGuard],
+    data: { expectedRole: 'broker' },
+  },
+  {
+    path: 'access-denied',
+    component: AccessDeniedComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule {
-
-  
- }
+export class AppRoutingModule {}

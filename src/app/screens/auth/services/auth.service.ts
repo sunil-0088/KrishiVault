@@ -7,8 +7,9 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { User } from '../modal/user';
-import { Observable, catchError, of, switchMap, tap } from 'rxjs';
+import { Observable, catchError, of, switchMap, take, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 @Injectable({
   providedIn: 'root',
 })
@@ -16,13 +17,14 @@ export class AuthService {
   async initialize(): Promise<any> {
     return Promise.resolve();
   }
+
   user$!: Observable<User | null | undefined>;
   constructor(
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore,
     private router: Router,
     private taostr: ToastrService,
-    private route: ActivatedRoute
+    private storage: AngularFireStorage
   ) {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
@@ -30,16 +32,9 @@ export class AuthService {
           return this.afs
             .collection('users')
             .doc<User>(user.uid)
-            .valueChanges();;
+            .valueChanges();
         } else {
           return of(null);
-        }
-      }),
-      tap((user) => {
-        if (user) {
-          // this.router.navigate(['home']);
-        } else {
-          this.router.navigate(['auth']);
         }
       }),
       catchError((error) => {
@@ -47,15 +42,11 @@ export class AuthService {
         return of(null);
       })
     );
-    this.user$.subscribe((data) => {
-      console.log(data);
-    });
   }
 
   async googleSignIn() {
     const provider = new GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
-    this.router.navigate(["/auth/role-details"])
     return this.updateUserData(credential.user);
   }
 
@@ -71,7 +62,7 @@ export class AuthService {
       this.taostr.success(
         'Sign up successful. Please check your email to verify your account.'
       );
-      return this.updateUserData(credential.user);
+      return;
     } catch (error: any) {
       this.taostr.error(this.getCustomErrorMessage(error.code));
     }
@@ -96,18 +87,33 @@ export class AuthService {
     }
   }
 
-  private async updateUserData(user: any) {
-    const userRef = this.afs.doc<User>(`users/${user.uid}`);
-    const data = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-    };
-
+  public async updateUserData(user: any) {
     try {
-      await userRef.set(data, { merge: true });
+      const userRef = this.afs.doc<User>(`users/${user.uid}`);
+      if (!user.role) {
+        const userDoc = await userRef.get().pipe(take(1)).toPromise();
+        if (!userDoc) {
+          const data: User = {
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            emailVerified: user.emailVerified,
+            role: null,
+          };
+          await userRef.set(data, { merge: true });
+        }
+      } else {
+        const data: User = {
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          emailVerified: user.emailVerified,
+          role: user.role,
+        };
+        await userRef.set(data, { merge: true });
+      }
     } catch (error) {
       console.log('Error updating user data:', error);
     }
@@ -183,5 +189,12 @@ export class AuthService {
       default:
         return 'An unknown error occurred. Please try again.';
     }
+  }
+
+  async uploadImage(userId: string, file: File) {
+    const path = `profile_images/${userId}`;
+    const storageRef = this.storage.ref(path);
+    const task = await storageRef.put(file);
+    return task.ref.getDownloadURL();
   }
 }
