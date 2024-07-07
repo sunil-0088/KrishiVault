@@ -27,7 +27,10 @@ export class AuthService {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
-          return this.user$;
+          return this.afs
+            .collection('users')
+            .doc<User>(user.uid)
+            .valueChanges();;
         } else {
           return of(null);
         }
@@ -52,6 +55,7 @@ export class AuthService {
   async googleSignIn() {
     const provider = new GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
+    this.router.navigate(["/auth/role-details"])
     return this.updateUserData(credential.user);
   }
 

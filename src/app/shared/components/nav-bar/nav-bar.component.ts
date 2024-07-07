@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/screens/auth/services/auth.service';
 export class NavBarComponent {
   constructor(private authService: AuthService) {}
 
-  async logOut(){
-   await this.authService.signOut();
+  async logOut() {
+    await this.authService.signOut();
   }
 }

@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { ToastrModule } from 'ngx-toastr';
+import { RoleDetailsComponent } from './components/role-details/role-details.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import { ToastrModule } from 'ngx-toastr';
     AuthComponent,
     SignUpComponent,
     ForgotPasswordComponent,
+    RoleDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +25,6 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     ReactiveFormsModule,
     AngularFirestoreModule,
-    
   ],
 
   exports: [AuthComponent],

@@ -1,5 +1,5 @@
 <form *ngIf="signupForm" [formGroup]="signupForm">
-  <div class="container col align-items-center">
+  <div class="container col align-items-center auth-cont">
     <div class="w-100 mb-2">
       <h5 class="text-secondary-emphasis">Let's Get Started</h5>
       <h6 class="text-secondary">Sign up your account</h6>
@@ -90,10 +90,10 @@
     <button
       type="button"
       (click)="googleAuth()"
-      class="btn btn-outline-secondary google-btn"
+      class="btn btn-danger google-btn"
       [disabled]="isLoading || isGoogleLogin"
     >
-      <img height="16" src="assets/google.svg" alt="" />
+      <i class="bi bi-google"></i>
       Continue With Google
     </button>
 
