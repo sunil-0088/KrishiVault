@@ -8,7 +8,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { User } from '../../modal/user';
 
 @Component({
   selector: 'app-login',
@@ -46,10 +45,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   async login() {
     if (this.loginForm!.valid) {
       this.isLoading = true;
-      await this.authService.emailSignIn(
-        this.loginForm!.value.email,
-        this.loginForm!.value.password
-      );
+     var user = await this.authService.emailSignIn(
+       this.loginForm!.value.email,
+       this.loginForm!.value.password
+     );
+      if(user?.emailVerified)
       this.userSubscription = this.authService.user$.subscribe((data) => {
         if (data?.role) {
           this.router.navigate(['/home']);

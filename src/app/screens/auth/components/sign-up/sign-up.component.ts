@@ -84,6 +84,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
         this.signupForm!.value.email,
         this.signupForm!.value.password
       );
+      this.signupForm?.reset();
       this.isLoading = false;
     } else {
       this.signupForm!.markAllAsTouched();

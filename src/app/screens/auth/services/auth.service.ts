@@ -62,6 +62,7 @@ export class AuthService {
       this.taostr.success(
         'Sign up successful. Please check your email to verify your account.'
       );
+      this.router.navigate(['/auth/login']);
       return;
     } catch (error: any) {
       this.taostr.error(this.getCustomErrorMessage(error.code));
@@ -78,9 +79,10 @@ export class AuthService {
         // await credential.user?.sendEmailVerification();
         await this.afAuth.signOut();
         this.taostr.error('Please verify your email before Login.');
-        return;
+        return credential.user;
       }
-      return this.updateUserData(credential.user);
+      await this.updateUserData(credential.user);
+      return credential.user;
     } catch (error: any) {
       this.taostr.error(this.getCustomErrorMessage(error.code));
       return;
@@ -92,12 +94,12 @@ export class AuthService {
       const userRef = this.afs.doc<User>(`users/${user.uid}`);
       if (!user.role) {
         const userDoc = await userRef.get().pipe(take(1)).toPromise();
-        if (!userDoc) {
+        if (!userDoc?.exists) {
           const data: User = {
             uid: user.uid,
             email: user.email,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
+            displayName: user.displayName || '',
+            photoURL: user.photoURL || '',
             emailVerified: user.emailVerified,
             role: null,
           };
@@ -107,8 +109,8 @@ export class AuthService {
         const data: User = {
           uid: user.uid,
           email: user.email,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
+          displayName: user.displayName || '',
+          photoURL: user.photoURL || '',
           emailVerified: user.emailVerified,
           role: user.role,
         };
