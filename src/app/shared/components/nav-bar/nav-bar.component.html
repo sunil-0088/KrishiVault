@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+<nav *ngIf="!isAuthRouteActive" class="navbar navbar-expand-md navbar-light bg-light">
   <div class="container-fluid">
     <img
       style="margin-right: 20px; width: 140px"
@@ -28,7 +28,7 @@
             >Home</a
           >
         </li>
-        <li class="nav-item">
+        <li *ngIf="user?.role == 'farmer'" class="nav-item">
           <a
             routerLink="/farmer"
             routerLinkActive="active"
@@ -38,7 +38,7 @@
             >Farmer</a
           >
         </li>
-        <li class="nav-item">
+        <li *ngIf="user?.role == 'broker'" class="nav-item">
           <a
             routerLink="/broker"
             routerLinkActive="active"
@@ -53,7 +53,7 @@
             >News</a
           >
         </li>
-        
+
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -98,7 +98,11 @@
         <button class="btn btn-outline-primary">
           <i class="bi bi-search"></i>
         </button>
-        <button class="btn btn-primary" (click)="logOut()" routerLink="/auth/login">
+        <button
+          class="btn btn-primary"
+          (click)="logOut()"
+          routerLink="/auth/login"
+        >
           Try It <i class="bi bi-box-arrow-in-right"></i>
         </button>
       </div>
