@@ -1,0 +1,33 @@
+<div #sidebar class="sidebar b position-relative">
+ <div class="d-inline d-md-none">
+     <i
+    class="bi "
+    [ngClass]="{
+      'bi-caret-right-square': isCollapsed,
+      'bi-caret-left-square': !isCollapsed
+    }"
+    (click)="toggleSidebar()"
+    class="toggle-btn"
+  ></i>
+ </div>
+  <ul class="list-unstyled mt-3">
+    <li>
+      <a href="#" class="d-flex align-items-center">
+        <i class="bi bi-house-door"></i>
+        <span class="ms-2">Home</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="d-flex align-items-center">
+        <i class="bi bi-person"></i>
+        <span class="ms-2">Profile</span>
+      </a>
+    </li>
+    <li>
+      <a href="#" class="d-flex align-items-center">
+        <i class="bi bi-gear"></i>
+        <span class="ms-2">Settings</span>
+      </a>
+    </li>
+  </ul>
+</div>

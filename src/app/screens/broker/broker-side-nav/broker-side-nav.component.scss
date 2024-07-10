@@ -1,0 +1,31 @@
+.sidebar {
+  width: 200px;
+  transition: width 0.3s;
+  overflow: hidden;
+  height: 100%;
+  border-right: 1px solid black;
+  transition: transform 0.3s ease, width 0.3s ease;
+
+}
+
+.sidebar.collapsed {
+  width: 40px;
+}
+
+.toggle-btn {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: left 0.3s;
+}
+
+.sidebar.collapsed a span {
+  display: none;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding: 10px;
+}
+

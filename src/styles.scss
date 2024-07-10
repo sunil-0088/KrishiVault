@@ -27,7 +27,6 @@ body {
 body {
   margin: 0;
   font-family: "Poppins" sans-serif, Roboto, "Helvetica Neue";
-  color: #545454;
 }
 
 .root-container {
@@ -35,28 +34,28 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: auto;
-  background-image:url('assets/bg.jpg') ;
+  // background-image:url('assets/bg.jpg') ;
   z-index: -100;
 }
 
-.root-container::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.3); /* White overlay */
-  backdrop-filter: blur(5px); /* Blur effect */
-  z-index: -99; /* Ensure the overlay is on top */
-}
+// .root-container::after {
+//   content: "";
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background: rgba(255, 255, 255, 0.3); /* White overlay */
+//   backdrop-filter: blur(5px); /* Blur effect */
+//   z-index: -99; /* Ensure the overlay is on top */
+// }
 
 .sub-container {
   flex-grow: 1;
   height: 100%;
   width: 100%;
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 // .row {
