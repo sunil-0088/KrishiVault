@@ -1,10 +1,10 @@
 <div #sidebar class="sidebar b position-relative">
- <div class="d-inline d-md-none">
-     <i
+ <div class="d-flex d-md-none collapse-btn">
+    <h5 *ngIf="!isCollapsed">Farmer</h5> <i
     class="bi "
     [ngClass]="{
-      'bi-caret-right-square': isCollapsed,
-      'bi-caret-left-square': !isCollapsed
+      'bi-caret-right': isCollapsed,
+      'bi-caret-left': !isCollapsed
     }"
     (click)="toggleSidebar()"
     class="toggle-btn"
