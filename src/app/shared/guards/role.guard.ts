@@ -14,7 +14,6 @@ export const roleGuard: CanActivateFn = (
 ): Observable<boolean> => {
   const authService = inject(AuthService);
   const router = inject(Router);
-
   const expectedRole = route.data['expectedRole'];
 
   return authService.user$.pipe(

@@ -1,0 +1,67 @@
+<div #sidebar class="sidebar b position-relative">
+  <div
+    class="d-none d-md-flex mx-1 justify-content-center align-items-center fw-bold fs-4"
+  >
+    Broker
+  </div>
+  <div
+    class=" d-flex d-md-none collapse-btn align-items-center"
+    [ngClass]="{
+      'justify-content-between': !isCollapsed
+    }"
+  >
+    <span class="ms-2 fw-bold fs-4" *ngIf="!isCollapsed">Broker</span
+    ><i
+      class="bi"
+      [ngClass]="{
+        'bi-arrow-bar-right': isCollapsed,
+        'bi-arrow-bar-left': !isCollapsed
+      }"
+      (click)="toggleSidebar()"
+      class="toggle-btn"
+    ></i>
+  </div>
+  <hr />
+  <ul class="list-unstyled mt-3">
+    <li>
+      <a
+        routerLink="/broker/dashboard"
+        routerLinkActive="active"
+        class="nav-btn d-flex align-items-center"
+      >
+        <i class="bi bi-columns"></i>
+        <span class="ms-2">Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/broker/buyout"
+        routerLinkActive="active"
+        class="nav-btn d-flex align-items-center"
+      >
+        <i class="bi bi-shop"></i>
+        <span class="ms-2">Buyout</span>
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/broker/farmers"
+        routerLinkActive="active"
+        class="nav-btn d-flex align-items-center"
+      >
+        <i class="bi bi-people"></i>
+        <span class="ms-2">Farmers</span>
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/broker/transactions"
+        routerLinkActive="active"
+        class="nav-btn d-flex align-items-center"
+      >
+        <i class="bi bi-bank"></i>
+        <span class="ms-2">Transactions</span>
+      </a>
+    </li>
+  </ul>
+</div>

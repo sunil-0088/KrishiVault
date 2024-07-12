@@ -10,6 +10,7 @@ import { FarmerComponent } from './screens/farmer/farmer.component';
 import { BrokerComponent } from './screens/broker/broker.component';
 import { AccessDeniedComponent } from './shared/components/access-denied/access-denied.component';
 import { roleGuard } from './shared/guards/role.guard';
+import { UserNonExistenceGuard } from './shared/guards/user-nonexistence.guard';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./screens/auth/auth.module').then((m) => m.AuthModule),
     component: AuthComponent,
+    canActivate: [UserNonExistenceGuard],
   },
   {
     path: 'news',
