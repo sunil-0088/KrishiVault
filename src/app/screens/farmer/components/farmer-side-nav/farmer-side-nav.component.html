@@ -1,1 +1,57 @@
-<p>farmer-side-nav works!</p>
+<div #sidebar class="sidebar b position-relative">
+  <div
+    class="d-none d-md-flex mx-1 justify-content-center align-items-center fw-bold fs-4"
+  >
+    Farmer
+  </div>
+  <div
+    class="d-flex d-md-none collapse-btn align-items-center"
+    [ngClass]="{
+      'justify-content-between': !isCollapsed
+    }"
+  >
+    <span class="ms-2 fw-bold fs-4" *ngIf="!isCollapsed">Farmer</span
+    ><i
+      class="bi"
+      [ngClass]="{
+        'bi-arrow-bar-right': isCollapsed,
+        'bi-arrow-bar-left': !isCollapsed
+      }"
+      (click)="toggleSidebar()"
+      class="toggle-btn"
+    ></i>
+  </div>
+  <hr />
+  <ul class="list-unstyled mt-3">
+    <li>
+      <a
+        routerLink="/farmer/dashboard"
+        routerLinkActive="active"
+        class="nav-btn d-flex align-items-center"
+      >
+        <i class="bi bi-columns"></i>
+        <span class="ms-2">Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/farmer/expenses"
+        routerLinkActive="active"
+        class="nav-btn d-flex align-items-center"
+      >
+        <i class="bi bi-wallet"></i>
+        <span class="ms-2">Expenses</span>
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/farmer/brokers"
+        routerLinkActive="active"
+        class="nav-btn d-flex align-items-center"
+      >
+        <i class="bi bi-people"></i>
+        <span class="ms-2">Brokers</span>
+      </a>
+    </li>
+  </ul>
+</div>

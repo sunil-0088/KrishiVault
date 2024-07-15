@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
-import { FarmerComponent } from '../farmer/farmer.component';
 import { BuyoutComponent } from './components/buyout/buyout.component';
+import { FarmersComponent } from './components/farmers/farmers.component';
 
 
 const routes: Routes = [
@@ -27,7 +27,7 @@ const routes: Routes = [
       },
       {
         path: 'farmers',
-        component: FarmerComponent,
+        component: FarmersComponent,
       },
       {
         path: 'transactions',
