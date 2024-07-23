@@ -6,17 +6,32 @@
   box-sizing: border-box;
 }
 
-// .icon-circle {
-//   width: 35px;
-//   height: 35px;
-//   background-color: #e0f7ff;
-//   border-radius: 50%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   color: #00bcd4;
-//   font-size: 18px;
-// }
+.dash-container::-webkit-scrollbar {
+  width: 0px; 
+  background: transparent; 
+}
+
+.overview {
+  box-sizing: border-box;
+}
+
+.statistics {
+  max-height: 100%;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
+}
+
+@media screen and (min-width: 700px) {
+  .statistics {
+    padding-left: 0;
+    margin-top: 0;
+  }
+
+  .first-section {
+    height: 350px;
+  }
+}
+
 .percentage {
   background-color: #e6ffed;
   color: #00c853;
@@ -25,12 +40,12 @@
   font-size: 12px;
 }
 
+.custom-row {
+  padding: 0px;
+  margin: 0px;
+}
 .text-muted {
   font-size: small;
-}
-.overview {
-  gap: 10px;
-  box-sizing: border-box;
 }
 
 .icon-circle {
@@ -42,31 +57,43 @@
   justify-content: center;
   font-size: 24px;
 }
-.card-1 .icon-circle {
-  background-color: #e0f7ff;
-  color: #00bcd4;
-}
-.card-2 .icon-circle {
-  background-color: #fff4e6;
-  color: #ff9800;
-}
-.card-3 .icon-circle {
-  background-color: #f0e6ff;
-  color: #9c27b0;
-}
-.card-4 .icon-circle {
-  background-color: #e6ffed;
-  color: #00c853;
-}
+
 .card-1 {
   border: 2px solid #e0f7ff;
+  .icon-circle {
+    background-color: #e0f7ff;
+    color: #00bcd4;
+  }
 }
 .card-2 {
   border: 2px solid #fff4e6;
+  .icon-circle {
+    background-color: #fff4e6;
+    color: #ff9800;
+  }
 }
 .card-3 {
   border: 2px solid #f0e6ff;
+  .icon-circle {
+    background-color: #f0e6ff;
+    color: #9c27b0;
+  }
 }
 .card-4 {
   border: 2px solid #e6ffed;
+  .icon-circle {
+    background-color: #e6ffed;
+    color: #00c853;
+  }
+}
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.view-all{
+  color: #00c853;
+  font-size: small;
+  cursor: pointer;
 }

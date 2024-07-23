@@ -7,6 +7,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BuyoutComponent } from './components/buyout/buyout.component';
 import { FarmersComponent } from './components/farmers/farmers.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
+import { ChartModule } from 'primeng/chart';
 
 
 
@@ -19,10 +20,6 @@ import { TransactionsComponent } from './components/transactions/transactions.co
     FarmersComponent,
     TransactionsComponent,
   ],
-  imports: [
-    CommonModule,
-    BrokerRoutingModule,
-
-  ]
+  imports: [CommonModule, BrokerRoutingModule, ChartModule],
 })
-export class BrokerModule { }
+export class BrokerModule {}

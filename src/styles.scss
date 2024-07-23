@@ -1,11 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
+@import '../node_modules/bootstrap/scss/functions';
+@import '../node_modules/bootstrap/scss/variables';
+
+// Override Bootstrap's breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 450px,
+  md: 700px,
+  lg: 1024px, // Custom value
+  xl: 1200px
+);
+
 $primary: green;
 $secondary:greenyellow;
 
 @import "bootstrap/scss/bootstrap";
-
 // $secondary: #your-desired-secondary-color;
 // $success: #your-desired-success-color;
 
@@ -82,7 +93,6 @@ hr {
   color: rgb(36, 143, 36);
   cursor: pointer;
   font-size: 16px;
-  text-decoration: underline;
 }
 
 .text-button:hover {

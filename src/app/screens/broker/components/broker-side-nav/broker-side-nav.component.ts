@@ -15,7 +15,7 @@ import {
 export class BrokerSideNavComponent implements AfterViewInit {
   @ViewChild('sidebar') sidebar!: ElementRef;
   isCollapsed = false;
-  midScreenWidth = 768;
+  midScreenWidth = 699;
 
   constructor(private cdr: ChangeDetectorRef) {}
   ngAfterViewInit(): void {
