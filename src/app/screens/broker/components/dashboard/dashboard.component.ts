@@ -46,6 +46,14 @@ export class DashboardComponent implements AfterViewInit {
             yAxisID: 'y-axis-temp',
             borderWidth: 1,
           },
+          {
+            label: 'Farmer Count',
+            data: [2, 5, 6, 1, 7, 4, 3],
+            borderColor: 'rgba(75, 92, 175, 1)',
+            backgroundColor: 'rgba(75, 92, 175, 0.2)',
+            yAxisID: 'y-axis-temp',
+            borderWidth: 1,
+          },
         ],
       },
       options: {
@@ -58,13 +66,13 @@ export class DashboardComponent implements AfterViewInit {
           //     align: 'center',
           //   },
           // },
-          // x: {
-          //   title: {
-          //     display: true,
-          //     text: 'Time',
-          //     align: 'center',
-          //   },
-          // },
+          x: {
+            title: {
+              display: true,
+              text: '-- Date --',
+              align: 'center',
+            },
+          },
         },
 
         responsive: true,
@@ -73,18 +81,17 @@ export class DashboardComponent implements AfterViewInit {
   }
   @HostListener('window:resize', ['$event'])
   onResize() {
-    // Update chart aspect ratio on window resize
     this.updateChartAspectRatio();
   }
 
   updateChartAspectRatio() {
     const width = window.innerWidth;
-    let aspectRatio = 3; // Default aspect ratio for larger screens
+    let aspectRatio = 3;
 
     if (width < 450) {
-      aspectRatio = 1.4; // Aspect ratio for small screens
+      aspectRatio = 1.4;
     } else if (width < 700) {
-      aspectRatio = 2; // Aspect ratio for medium screens
+      aspectRatio = 2;
     }
 
     if (this.chartRef) {

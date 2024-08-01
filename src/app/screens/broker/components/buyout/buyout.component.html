@@ -1,1 +1,18 @@
-<h3>Buyout</h3>
+<div class="spreadsheet-container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns">{{ column }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows; let rowIndex = index">
+        <td *ngFor="let cell of row; let colIndex = index">
+          <input type="text" [(ngModel)]="rows[rowIndex][colIndex]" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-primary" (click)="addRow()">Add Row</button>
+  <button class="btn btn-success" (click)="saveData()">Save Data</button>
+</div>
